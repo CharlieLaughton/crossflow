@@ -63,7 +63,7 @@ class FileHandle(object):
             )
         if must_exist:
             if not os.path.exists(path):
-                raise IOError("Error - no such file")
+                raise IOError(f"Error - {path}: no such file")
             source = fsspec.open(path)
             ext = os.path.splitext(path)[1]
             self.path = path
@@ -86,7 +86,7 @@ class FileHandle(object):
                 self.store.mode = "rb"
         else:
             if os.path.exists(path):
-                raise IOError("Error - file already exists")
+                raise IOError(f"Error - file {path} already exists")
             ext = os.path.splitext(path)[1]
             self.uid = str(uuid.uuid4()) + ext
             self.local_path = None
